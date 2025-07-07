@@ -13,7 +13,7 @@ After spending a week reverse engineering the Java code for the Android app, I w
 I might never have found the key if it weren't for this post: https://www.tarball.ca/posts/reverse-engineering-the-bm6-ble-battery-monitor/
 from https://github.com/JeffWDH. Unfortunately, he hadn't posted it on GitHub at that time. So, it was challenging to find it.
 
-After I found Jeffs post, it was just a mattery of converting the AES-key to C and using an existing and well documented AES-Stack for ESP32.
+After I found Jeffs post, it was just a matter of converting the AES-key to C and using an existing and well documented AES-Stack for ESP32.
 Within 2 days the correct values started flowing in.
 
 The data the BM6 returns is AES-encrypted. Additionally, the app uses different keys to encrypt all data sent back to China.
