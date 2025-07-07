@@ -30,8 +30,11 @@ As with most BLE devices, only one device can connect at a time.
 ## Important:
 As the 2.4GHz Frequenz is used by a lot of devices, it may happen that a connection / reconnection fails. Therefore it is advisable to try a few times. 
 This has been added to re-connect and connect.
+
 The device requests connection parameters that I have set to the same value during initialisation [updateConnParams(6,12,0,150)]. This will save a little time while connecting.
+
 The BM**5** from leagend uses a different communication(!)
+
 The NimBLE-Arduino BLE stack (2.3.2) is used for the connection. https://github.com/h2zero/NimBLE-Arduino
 
 The ESP-32 Dev Kit 4 is used as a hardware platform.
