@@ -197,19 +197,24 @@ void notifyCB_BM6(NimBLERemoteCharacteristic* pRemoteCharacteristic, uint8_t* pD
     }
   Serial.println();
   // esp_aes_free(&aes_ctx);
-      
-  Battery_Guard_T=decryptedtext[4];                         // Temperatur Sensor-Housing
-  Battery_Guard_SOC=decryptedtext[6];                       // SOC Battery - State of Charge mostly useless
-  Battery_Guard_Volt=decryptedtext[7]*256+decryptedtext[8]; // Voltage of Battery
-  Serial.printf(" Temp: %d, SOC: %d, Volt: %d\n", Battery_Guard_T,Battery_Guard_SOC,Battery_Guard_Volt);
 
-  delay(2000);    // wait for several dataset
-// keep alive if all values 0
-  if(Battery_Guard_T !=0 && Battery_Guard_SOC !=0 && Battery_Guard_Volt != 0) // First dataset is sometimes 0 so wait for next
+  if(decryptedtext[3] !=0)
+    {Serial.println("Received Dataset is not valid");}
+  else
     {
-    if(pClient_BM6)                       // Only 1 reading required, Disconnect if active
-      {pClient_BM6->disconnect();
-      Serial.println("BM6-BLE disconnect");}
+    Battery_Guard_T=decryptedtext[4];                         // Temperatur Sensor-Housing
+    Battery_Guard_SOC=decryptedtext[6];                       // SOC Battery - State of Charge mostly useless
+    Battery_Guard_Volt=decryptedtext[7]*256+decryptedtext[8]; // Voltage of Battery
+    Serial.printf(" Temp: %d, SOC: %d, Volt: %d\n", Battery_Guard_T,Battery_Guard_SOC,Battery_Guard_Volt);
+
+//    delay(2000);    // wait for several dataset
+    // keep alive if all values 0
+    if(Battery_Guard_T !=0 && Battery_Guard_SOC !=0 && Battery_Guard_Volt != 0) // First dataset is sometimes 0 so wait for next
+      {
+      if(pClient_BM6)                       // Only 1 reading required, Disconnect if active
+        {pClient_BM6->disconnect();
+        Serial.println("BM6-BLE disconnect");}
+      }
     }
 }
 
